@@ -34,4 +34,21 @@ A modern, full-stack inventory management system built with Next.js, TypeScript,
 - **QR Codes:** qrcode library
 - **State Management:** React Hooks
 
----
+# Dashboard
+<img width="960" height="442" alt="image" src="https://github.com/user-attachments/assets/c3bc2892-73a2-49fe-8bde-af1f7afe3010" />
+# products
+<img width="960" height="443" alt="image" src="https://github.com/user-attachments/assets/c1eddc5d-fa8b-4108-a6c0-ae3d2388370c" />
+# Edit product
+<img width="561" height="448" alt="image" src="https://github.com/user-attachments/assets/76a90895-6c56-484c-b59a-374b42ebf3e6" />
+# Manage Location
+<img width="960" height="451" alt="image" src="https://github.com/user-attachments/assets/c85dfa5d-2a1c-4927-a80f-a6ac21c80c0b" />
+# Inventory and stock movement
+<img width="951" height="422" alt="image" src="https://github.com/user-attachments/assets/8121b2ad-aad8-401f-aeb2-bb3c27e7b831" />
+# view Reports
+<img width="960" height="434" alt="image" src="https://github.com/user-attachments/assets/800e4945-50b6-4076-9a7d-815fd0618730" />
+
+
+
+
+
+
