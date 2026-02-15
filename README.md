@@ -33,3 +33,12 @@ A modern, full-featured inventory management system built with Next.js 15, Supab
 - **Icons:** Lucide React
 - **QR Codes:** qrcode library
 - **State Management:** React Hooks
+<img width="946" height="478" alt="image" src="https://github.com/user-attachments/assets/bbc6337e-122a-4422-9bad-78e5e40aa925" />
+
+<img width="958" height="448" alt="image" src="https://github.com/user-attachments/assets/67d1a273-d1c4-41c3-a0d5-911a7203dba6" />
+
+<img width="960" height="446" alt="image" src="https://github.com/user-attachments/assets/fc2d7920-28da-4fb3-a821-3d67560a54e3" />
+
+
+
+
