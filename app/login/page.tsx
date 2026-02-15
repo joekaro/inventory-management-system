@@ -329,11 +329,6 @@ export default function LoginPage() {
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-4 left-0 right-0 text-center">
-        <p className="text-sm text-gray-600">
-          © 2025 Inventory Pro. Built for small businesses.
-        </p>
-      </div>
     </div>
   );
 }
