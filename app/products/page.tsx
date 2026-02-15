@@ -9,6 +9,9 @@ import DeleteButton from '@/components/DeleteButton';
 import ProductsFilter from '@/components/ProductsFilter';
 import ExportButton from '@/components/ExportButton';
 
+// Force dynamic rendering
+export const dynamic = 'force-dynamic';
+
 export default function ProductsPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
