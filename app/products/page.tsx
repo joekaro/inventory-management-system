@@ -4,13 +4,10 @@ import { useEffect, useState } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
-import { Pencil, Package, Home, ShoppingCart, Settings, Plus, Search, Filter } from 'lucide-react';
+import { Pencil, Package, Home, ShoppingCart, Settings, Plus } from 'lucide-react';
 import DeleteButton from '@/components/DeleteButton';
 import ProductsFilter from '@/components/ProductsFilter';
 import ExportButton from '@/components/ExportButton';
-
-// Force dynamic rendering
-export const dynamic = 'force-dynamic';
 
 export default function ProductsPage() {
   const router = useRouter();
@@ -18,11 +15,18 @@ export default function ProductsPage() {
   const [products, setProducts] = useState<any[]>([]);
   const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    checkAuth();
-    fetchProducts();
-  }, [searchParams]);
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (mounted) {
+      checkAuth();
+      fetchProducts();
+    }
+  }, [searchParams, mounted]);
 
   const checkAuth = async () => {
     const { data: { session } } = await supabase.auth.getSession();
@@ -32,32 +36,41 @@ export default function ProductsPage() {
   };
 
   const fetchProducts = async () => {
-    let query = supabase.from("products").select("*");
+    try {
+      let query = supabase.from("products").select("*");
 
-    const search = searchParams.get('search');
-    const category = searchParams.get('category');
+      const search = searchParams.get('search');
+      const category = searchParams.get('category');
 
-    if (search) {
-      const searchTerm = `%${search}%`;
-      query = query.or(`name.ilike.${searchTerm},sku.ilike.${searchTerm},description.ilike.${searchTerm}`);
+      if (search) {
+        const searchTerm = `%${search}%`;
+        query = query.or(`name.ilike.${searchTerm},sku.ilike.${searchTerm},description.ilike.${searchTerm}`);
+      }
+
+      if (category && category !== "all") {
+        query = query.eq("category", category);
+      }
+
+      const { data } = await query.order("created_at", { ascending: false });
+      setProducts(data || []);
+
+      const { data: allProducts } = await supabase.from("products").select("category");
+      const cats = [...new Set(allProducts?.map((p) => p.category).filter(Boolean))] as string[];
+      setCategories(cats);
+      
+      setLoading(false);
+    } catch (error) {
+      console.error('Error fetching products:', error);
+      setLoading(false);
     }
-
-    if (category && category !== "all") {
-      query = query.eq("category", category);
-    }
-
-    const { data } = await query.order("created_at", { ascending: false });
-    setProducts(data || []);
-
-    const { data: allProducts } = await supabase.from("products").select("category");
-    const cats = [...new Set(allProducts?.map((p) => p.category).filter(Boolean))] as string[];
-    setCategories(cats);
-    
-    setLoading(false);
   };
 
-  if (loading) {
-    return <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50"><p>Loading...</p></div>;
+  if (!mounted || loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-50 to-blue-50">
+        <p>Loading...</p>
+      </div>
+    );
   }
 
   return (
